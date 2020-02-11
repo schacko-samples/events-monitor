@@ -1,0 +1,29 @@
+{
+  "eventId": "2677762869a71f439b4b56a7324b0f51626853238645666704",
+  "publishDate": "2020-02-07T14:12:55.208",
+  "company": {
+    "name": "Team One Security ApS",
+    "rating": "AA",
+    "countryRegistrationNumber": "32358659",
+    "duns": "305106495",
+    "country": "dk",
+    "internalId": "dk-32358659",
+    "addedDate": null
+  },
+  "details": {
+    "amount": null,
+    "type": {
+      "category": "FINANCIAL_INFORMATION",
+      "code": "NUMBER_OF_EMPLOY"
+    },
+    "change": {
+      "oldValue": "",
+      "newValue": ""
+    },
+    "ssn": [],
+    "registrationDate": null,
+    "eventDate": "2020-02-07T14:12:55.21",
+    "comment": ""
+  },
+  "type": "INCREMENTAL"
+}

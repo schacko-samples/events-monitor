@@ -1,0 +1,21 @@
+spring:
+  kafka:
+    consumer:
+      group-id: monitoring-events
+    streams:
+      application-id: monitoring-events-consumer
+    bootstrap-servers: localhost:29092
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:29092
+      bindings:
+        monitoring-events-in:
+          destination: monitoring-events
+        #          contentType: application/json
+        monitoring-events-out:
+          destination: monitoring-events
+  #          contentType: application/json
+  application:
+    name: monitoring-events-consumer
