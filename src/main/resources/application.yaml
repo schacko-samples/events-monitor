@@ -7,15 +7,29 @@ spring:
     bootstrap-servers: localhost:29092
   cloud:
     stream:
+      default:
+        group: monitoring
+      schemaRegistryClient:
+        cached: true
+        endpoint: http://localhost:8081
       kafka:
         binder:
           brokers: localhost:29092
-      bindings:
-        monitoring-events-in:
-          destination: monitoring-events
-        #          contentType: application/json
-        monitoring-events-out:
-          destination: monitoring-events
-  #          contentType: application/json
+          producer-properties:
+            key.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+            value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+            schema.registry.url: http://localhost:8081
+          consumer-properties:
+            key.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+            value.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+            schema.registry.url: http://localhost:8081
+            specific.avro.reader: true
+        bindings:
+          monitoring-events-in:
+            destination: monitoring-events-in
+            content-type: application/*+avro
+          monitoring-events-out:
+            destination: monitoring-events-out
+            content-type: application/*+avro
   application:
     name: monitoring-events-consumer

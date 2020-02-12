@@ -3,7 +3,8 @@ package com.bisnode.monitoring.service.consumer.eventsconsumer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import org.springframework.kafka.test.EmbeddedKafkaBroker;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -14,17 +15,20 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @DirtiesContext
-@EmbeddedKafka(partitions = 1, topics = {})
+@EmbeddedKafka(
+  bootstrapServersProperty = "spring.kafka.bootstrap-servers",
+  partitions = 10,
+  topics = {"monitoring-events"})
 class EventsConsumerIntegrationTest {
-  static {
-    System.setProperty(EmbeddedKafkaBroker.BROKER_LIST_PROPERTY, "spring.kafka.bootstrap-servers");
-  }
+
+  @Autowired
+  private KafkaTemplate<String, String> template;
 
   @BeforeEach
   void setUp() {
   }
 
   @Test
-  void handleGreetings() {
+  void handleEvents() {
   }
 }

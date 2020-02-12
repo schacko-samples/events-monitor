@@ -1,0 +1,77 @@
+{
+  "name": "Details",
+  "namespace": "com.bisnode.monitoring.events",
+  "type": "record",
+  "fields": [
+    {
+      "name": "amount",
+      "type": {
+        "type": "record",
+        "name": "EventAmount",
+        "fields": [
+          {
+            "name": "value",
+            "type": "double"
+          },
+          {
+            "name": "currency",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "type",
+      "type": {
+        "name": "EventType",
+        "type": "record",
+        "fields": [
+          {
+            "name": "category",
+            "type": "string"
+          },
+          {
+            "name": "code",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "change",
+      "type": {
+        "name": "EventChange",
+        "type": "record",
+        "fields": [
+          {
+            "name": "oldValue",
+            "type": "string"
+          },
+          {
+            "name": "newValue",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "registrationDate",
+      "type": "string"
+    },
+    {
+      "name": "eventDate",
+      "type": "string"
+    },
+    {
+      "name": "comment",
+      "type": "string"
+    },
+    {
+      "name": "ssn",
+      "type": {
+        "type": "array",
+        "items": "string"
+      }
+    }
+  ]
+}

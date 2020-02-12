@@ -1,0 +1,27 @@
+{
+  "name": "Event",
+  "namespace": "com.bisnode.monitoring.events",
+  "type": "record",
+  "fields": [
+    {
+      "name": "eventId",
+      "type": "string"
+    },
+    {
+      "name": "publishDate",
+      "type": "string"
+    },
+    {
+      "name": "company",
+      "type": "com.bisnode.monitoring.events.Company"
+    },
+    {
+      "name": "details",
+      "type": "com.bisnode.monitoring.events.Details"
+    },
+    {
+      "name": "type",
+      "type": "string"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "name": "Company",
+  "namespace": "com.bisnode.monitoring.events",
+  "type": "record",
+  "fields": [
+    {
+      "name": "companyId",
+      "type": "string"
+    },
+    {
+      "name": "internalId",
+      "type": "string"
+    },
+    {
+      "name": "name",
+      "type": "string"
+    },
+    {
+      "name": "rating",
+      "type": "string"
+    },
+    {
+      "name": "countryRegistrationNumber",
+      "type": "string"
+    },
+    {
+      "name": "country",
+      "type": "string"
+    },
+    {
+      "name": "duns",
+      "type": "string"
+    },
+    {
+      "name": "addedDate",
+      "type": "string"
+    },
+    {
+      "name": "reference",
+      "type": "string"
+    },
+    {
+      "name": "changedDateTime",
+      "type": "string"
+    },
+    {
+      "name": "portfolioAction",
+      "type": "string"
+    }
+  ]
+}
