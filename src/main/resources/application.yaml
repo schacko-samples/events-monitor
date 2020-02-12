@@ -8,10 +8,15 @@ spring:
   cloud:
     stream:
       default:
-        group: monitoring
+        producer:
+          useNativeEncoding: true
+        consumer:
+          useNativeEncoding: true
       schemaRegistryClient:
         cached: true
         endpoint: http://localhost:8081
+        schema:
+          schema-locations: classpath:avro/event.avsc
       kafka:
         binder:
           brokers: localhost:29092
@@ -25,11 +30,12 @@ spring:
             schema.registry.url: http://localhost:8081
             specific.avro.reader: true
         bindings:
-          monitoring-events-in:
-            destination: monitoring-events-in
+          input:
+            destination: monitoring-events
             content-type: application/*+avro
-          monitoring-events-out:
-            destination: monitoring-events-out
+          #            group: monitoring
+          output:
+            destination: monitoring-events
             content-type: application/*+avro
   application:
     name: monitoring-events-consumer

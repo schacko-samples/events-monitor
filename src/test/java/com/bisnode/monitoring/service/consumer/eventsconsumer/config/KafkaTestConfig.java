@@ -1,20 +1,17 @@
 package com.bisnode.monitoring.service.consumer.eventsconsumer.config;
 
-import com.bisnode.monitoring.service.consumer.eventsconsumer.EventsStream;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.cloud.stream.annotation.EnableBinding;
+import org.springframework.cloud.stream.messaging.Processor;
+import org.springframework.cloud.stream.schema.client.EnableSchemaRegistryClient;
 
 /**
  * @author tess
  * @since 2020-02-12
  */
 @TestConfiguration
-@EnableBinding(EventsStream.class)
+@EnableSchemaRegistryClient
+@EnableBinding(Processor.class)
 public class KafkaTestConfig {
-
-//  @Bean @Primary
-//  public SchemaRegistryClient schemaRegistryClient() {
-//    return (SchemaRegistryClient) new MockSchemaRegistryClient();
-//  }
 
 }

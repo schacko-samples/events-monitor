@@ -1,13 +1,14 @@
 package com.bisnode.monitoring.service.consumer.eventsconsumer;
 
-import com.bisnode.monitoring.events.*;
+import com.bisnode.monitoring.events.schema.*;
 import com.bisnode.monitoring.service.consumer.eventsconsumer.config.KafkaTestConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.cloud.stream.messaging.Processor;
 import org.springframework.context.annotation.Import;
+import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
@@ -17,21 +18,19 @@ import java.util.Arrays;
 
 import static org.junit.Assert.assertNotNull;
 
-@SpringBootTest
-@Configuration
+@SpringBootTest(properties = "com.bisnode.monitoring.event.test.enabled=true")
 @Import(KafkaTestConfig.class)
 @DirtiesContext
 @EmbeddedKafka(
   bootstrapServersProperty = "spring.kafka.bootstrap-servers",
   partitions = 10,
   topics = {
-    EventsStream.INPUT,
-    EventsStream.OUTPUT
+    "monitoring-events"
   })
 class EventsConsumerApplicationTests {
 
   @Autowired
-  private EventsStream eventsStream;
+  private Processor processor;
 
   private Event event;
 
@@ -68,16 +67,18 @@ class EventsConsumerApplicationTests {
       .setDetails(details)
       .setType("INCREMENTAL")
       .build();
-
   }
 
   @Test
   void handleEvents() {
-    Message<Event> message = MessageBuilder.withPayload(event)
+    Message<Event> message = MessageBuilder
+      .withPayload(event)
+      .setHeader(KafkaHeaders.MESSAGE_KEY, event.getEventId())
       .build();
 
-    assertNotNull(this.eventsStream.inboundEvents());
-    eventsStream.outboundEvents().send(message);
+    assertNotNull(this.processor);
+    processor.output().send(message);
+
   }
 
 }

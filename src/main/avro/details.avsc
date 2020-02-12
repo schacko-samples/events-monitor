@@ -1,6 +1,6 @@
 {
   "name": "Details",
-  "namespace": "com.bisnode.monitoring.events",
+  "namespace": "com.bisnode.monitoring.events.schema",
   "type": "record",
   "fields": [
     {

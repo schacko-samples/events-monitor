@@ -1,6 +1,6 @@
 {
   "name": "Event",
-  "namespace": "com.bisnode.monitoring.events",
+  "namespace": "com.bisnode.monitoring.events.schema",
   "type": "record",
   "fields": [
     {
@@ -13,11 +13,11 @@
     },
     {
       "name": "company",
-      "type": "com.bisnode.monitoring.events.Company"
+      "type": "com.bisnode.monitoring.events.schema.Company"
     },
     {
       "name": "details",
-      "type": "com.bisnode.monitoring.events.Details"
+      "type": "com.bisnode.monitoring.events.schema.Details"
     },
     {
       "name": "type",
