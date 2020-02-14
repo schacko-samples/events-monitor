@@ -67,6 +67,7 @@ dependencies {
   testImplementation 'org.springframework.cloud:spring-cloud-stream-test-support'
 
   // Kafka
+  implementation 'org.apache.kafka:kafka-streams'
   //implementation "io.confluent:kafka-schema-registry-client:${confluentVersion}"
   implementation "io.confluent:kafka-avro-serializer:${confluentVersion}"
   implementation "org.apache.avro:avro:1.9.1"

@@ -1,12 +1,11 @@
-package com.bisnode.monitoring.service.consumer.eventsconsumer;
+package com.bisnode.monitoring.service;
 
 import com.bisnode.monitoring.events.schema.*;
-import com.bisnode.monitoring.service.consumer.eventsconsumer.config.KafkaTestConfig;
+import com.bisnode.monitoring.service.config.KafkaTestConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.cloud.stream.messaging.Processor;
 import org.springframework.context.annotation.Import;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.kafka.test.context.EmbeddedKafka;
@@ -27,12 +26,13 @@ import static org.junit.Assert.assertNotNull;
   topics = {
     "monitoring-events"
   })
-class EventsConsumerApplicationTests {
+class EventsMonitoringApplicationTests {
 
   @Autowired
-  private Processor processor;
+  private EventsStream eventsStream;
 
   private Event event;
+  private EventKey eventKey;
 
   @BeforeEach
   void setUp() {
@@ -67,6 +67,10 @@ class EventsConsumerApplicationTests {
       .setDetails(details)
       .setType("INCREMENTAL")
       .build();
+
+    eventKey = EventKey.newBuilder()
+      .setEventId(event.getEventId())
+      .build();
   }
 
   @Test
@@ -76,8 +80,8 @@ class EventsConsumerApplicationTests {
       .setHeader(KafkaHeaders.MESSAGE_KEY, event.getEventId())
       .build();
 
-    assertNotNull(this.processor);
-    processor.output().send(message);
+    assertNotNull(this.eventsStream);
+    eventsStream.monitoringEventsOut().send(message);
 
   }
 

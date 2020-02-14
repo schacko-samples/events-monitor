@@ -1,9 +1,9 @@
-package com.bisnode.monitoring.service.consumer.eventsconsumer.config;
+package com.bisnode.monitoring.service.config;
 
+import com.bisnode.monitoring.service.EventsStream;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.messaging.Processor;
 import org.springframework.cloud.stream.schema.client.ConfluentSchemaRegistryClient;
 import org.springframework.cloud.stream.schema.client.SchemaRegistryClient;
 import org.springframework.context.annotation.Bean;
@@ -16,7 +16,7 @@ import org.springframework.kafka.annotation.EnableKafkaStreams;
  */
 @Configuration
 @EnableKafkaStreams
-@EnableBinding(Processor.class)
+@EnableBinding(EventsStream.class)
 @ConditionalOnProperty(
   name = "com.bisnode.monitoring.event.test.enabled",
   havingValue = "false",

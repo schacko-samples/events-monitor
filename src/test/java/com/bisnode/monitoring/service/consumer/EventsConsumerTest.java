@@ -1,4 +1,4 @@
-package com.bisnode.monitoring.service.consumer.eventsconsumer;
+package com.bisnode.monitoring.service.consumer;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

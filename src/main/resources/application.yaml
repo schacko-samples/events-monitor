@@ -1,10 +1,4 @@
 spring:
-  kafka:
-    consumer:
-      group-id: monitoring-events
-    streams:
-      application-id: monitoring-events-consumer
-    bootstrap-servers: localhost:29092
   cloud:
     stream:
       default:
@@ -19,7 +13,7 @@ spring:
           schema-locations: classpath:avro/event.avsc
       kafka:
         binder:
-          brokers: localhost:29092
+          brokers: localhost:9092
           producer-properties:
             key.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
             value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
@@ -30,11 +24,11 @@ spring:
             schema.registry.url: http://localhost:8081
             specific.avro.reader: true
         bindings:
-          input:
+          monitoring-events-in:
             destination: monitoring-events
             content-type: application/*+avro
           #            group: monitoring
-          output:
+          monitoring-events-out:
             destination: monitoring-events
             content-type: application/*+avro
   application:

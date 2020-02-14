@@ -1,0 +1,11 @@
+{
+  "name": "EventKey",
+  "namespace": "com.bisnode.monitoring.events.schema",
+  "type": "record",
+  "fields": [
+    {
+      "name": "eventId",
+      "type": "string"
+    }
+  ]
+}

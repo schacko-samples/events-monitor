@@ -4,14 +4,21 @@
   "company": {
     "name": "Team One Security ApS",
     "rating": "AA",
+    "companyId": "9999",
     "countryRegistrationNumber": "32358659",
     "duns": "305106495",
     "country": "dk",
     "internalId": "dk-32358659",
-    "addedDate": null
+    "addedDate": "2020-02-07T14:12:55.208",
+    "changedDateTime": "2020-02-07T14:12:55.208",
+    "reference": "ref",
+    "portfolioAction": "CHANGE"
   },
   "details": {
-    "amount": null,
+    "amount": {
+      "currency": "SEK",
+      "value": 0.0
+    },
     "type": {
       "category": "FINANCIAL_INFORMATION",
       "code": "NUMBER_OF_EMPLOY"
@@ -21,7 +28,7 @@
       "newValue": ""
     },
     "ssn": [],
-    "registrationDate": null,
+    "registrationDate": "2020-02-07T14:12:55.208",
     "eventDate": "2020-02-07T14:12:55.21",
     "comment": ""
   },
