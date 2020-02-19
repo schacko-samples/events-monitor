@@ -7,5 +7,5 @@ import com.bisnode.monitoring.events.schema.Event;
  * @since 2020-02-14
  */
 public interface EventsService {
-  void createEvent(Event event);
+  Event createEvent(Event event);
 }

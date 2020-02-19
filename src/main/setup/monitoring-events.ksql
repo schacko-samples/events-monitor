@@ -1,0 +1,40 @@
+CREATE STREAM monitoring_events (
+  eventId VARCHAR,
+  publishDate VARCHAR,
+  company STRUCT<
+    companyId VARCHAR,
+    internalIdId VARCHAR,
+    name VARCHAR,
+    rating VARCHAR,
+    countryRegistrationNumber VARCHAR,
+    country VARCHAR,
+    duns VARCHAR,
+    addedDate VARCHAR,
+    reference VARCHAR,
+    changedDateTime VARCHAR,
+    portfolioAction VARCHAR
+  >,
+  details STRUCT<
+      amount STRUCT<
+        value DOUBLE,
+        currency VARCHAR
+      >,
+      type STRUCT<
+        category VARCHAR,
+        code VARCHAR
+      >,
+      change STRUCT<
+        oldValue VARCHAR,
+        newValue VARCHAR
+      >,
+     registrationDate VARCHAR,
+     eventDate VARCHAR,
+     comment VARCHAR,
+     ssn ARRAY<VARCHAR>
+  >,
+  type VARCHAR)
+  WITH (
+    kafka_topic='monitoring_events_in',
+    value_format='AVRO',
+    PARTITIONS=1, REPLICAS=1
+  );

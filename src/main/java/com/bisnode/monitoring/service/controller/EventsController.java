@@ -32,7 +32,7 @@ public class EventsController {
       Event event = mapper.readValue(eventJson, Event.class);
       eventsService.createEvent(event);
     } catch (Throwable e) {
-      log.error(String.format("Caught {}", e.getMessage()));
+      log.error(e.getMessage());
       throw e;
     }
   }

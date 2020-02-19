@@ -1,6 +1,7 @@
 package com.bisnode.monitoring.service.producer;
 
 import com.bisnode.monitoring.events.schema.*;
+import com.bisnode.monitoring.service.config.EventsBinding;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import lombok.extern.slf4j.Slf4j;
@@ -78,7 +79,7 @@ public class EventsProducer {
 
     DefaultKafkaProducerFactory<EventKey, Event> pf = new DefaultKafkaProducerFactory<>(props);
     KafkaTemplate<EventKey, Event> template = new KafkaTemplate<>(pf, true);
-    template.setDefaultTopic("monitoring-events-in");
+    template.setDefaultTopic(EventsBinding.INPUT);
 
     template.sendDefault(eventKey, event);
   }

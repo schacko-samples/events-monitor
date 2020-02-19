@@ -1,6 +1,5 @@
 package com.bisnode.monitoring.service.config;
 
-import com.bisnode.monitoring.service.EventsStream;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.schema.client.EnableSchemaRegistryClient;
@@ -11,7 +10,7 @@ import org.springframework.cloud.stream.schema.client.EnableSchemaRegistryClient
  */
 @TestConfiguration
 @EnableSchemaRegistryClient
-@EnableBinding(EventsStream.class)
+@EnableBinding(EventsBinding.class)
 public class KafkaTestConfig {
 
 }

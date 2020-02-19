@@ -1,6 +1,7 @@
 package com.bisnode.monitoring.service;
 
 import com.bisnode.monitoring.events.schema.*;
+import com.bisnode.monitoring.service.config.EventsBinding;
 import com.bisnode.monitoring.service.config.KafkaTestConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,12 +25,12 @@ import static org.junit.Assert.assertNotNull;
   bootstrapServersProperty = "spring.kafka.bootstrap-servers",
   partitions = 10,
   topics = {
-    "monitoring-events"
+    "monitoring-eventsBinding"
   })
 class EventsMonitoringApplicationTests {
 
   @Autowired
-  private EventsStream eventsStream;
+  private EventsBinding eventsBinding;
 
   private Event event;
   private EventKey eventKey;
@@ -80,8 +81,8 @@ class EventsMonitoringApplicationTests {
       .setHeader(KafkaHeaders.MESSAGE_KEY, event.getEventId())
       .build();
 
-    assertNotNull(this.eventsStream);
-    eventsStream.monitoringEventsOut().send(message);
+    assertNotNull(this.eventsBinding);
+    eventsBinding.monitoringEventsOut().send(message);
 
   }
 
