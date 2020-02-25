@@ -1,7 +1,6 @@
 package com.bisnode.monitoring.service;
 
 import com.bisnode.monitoring.events.schema.*;
-import com.bisnode.monitoring.service.config.EventsBinding;
 import com.bisnode.monitoring.service.config.KafkaTestConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

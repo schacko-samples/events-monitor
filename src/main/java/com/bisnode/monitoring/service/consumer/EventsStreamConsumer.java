@@ -20,7 +20,7 @@ public class EventsStreamConsumer {
   @Bean
   public Consumer<KStream<EventKey, Event>> processEvent() {
     return input -> input.foreach((eventKey, event) -> {
-      log.info("Received stream event: {}", eventKey.getEventId());
+      log.info("Received stream event: {}", event);
     });
   }
 }

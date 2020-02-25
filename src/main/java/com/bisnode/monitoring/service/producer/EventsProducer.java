@@ -1,7 +1,6 @@
 package com.bisnode.monitoring.service.producer;
 
 import com.bisnode.monitoring.events.schema.*;
-import com.bisnode.monitoring.service.config.EventsBinding;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import lombok.extern.slf4j.Slf4j;
@@ -25,10 +24,6 @@ import java.util.Map;
 public class EventsProducer {
 
   public static void main(String... args) {
-
-    ObjectMapper mapper = new ObjectMapper();
-    Serde<Event> eventSerde = new JsonSerde<>(Event.class, mapper);
-
 
     Map<String, Object> props = new HashMap<>();
     props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
@@ -79,7 +74,7 @@ public class EventsProducer {
 
     DefaultKafkaProducerFactory<EventKey, Event> pf = new DefaultKafkaProducerFactory<>(props);
     KafkaTemplate<EventKey, Event> template = new KafkaTemplate<>(pf, true);
-    template.setDefaultTopic(EventsBinding.INPUT);
+    template.setDefaultTopic("monitoring_events_in-1");
 
     template.sendDefault(eventKey, event);
   }

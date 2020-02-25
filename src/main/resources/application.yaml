@@ -1,34 +1,31 @@
 spring:
-  application:
-    name: events-monitor
+  #  application:
+  #    name: events-monitor
   kafka:
     bootstrap-servers: localhost:9092
-  #    consumer:
-  #      group-id: events-monitor
   cloud:
     stream:
-      schemaRegistryClient:
-        cached: true
-        endpoint: http://localhost:8081
-        schema:
-          schema-locations: classpath:avro/event.avsc
       # Activate functions aka event handlers
       function:
-        definition: processEvent
-        bindings:
-          processEvent-in-0: monitoring_events_stream
+        definition: processEvent;handleEvent
+      #        bindings:
+      #          processEvent-in-0: monitoring_events_stream
       bindings:
-        monitoring_events_stream:
-          destination: monitoring_events_in
-          content-type: application/*+avro
-          consumer:
-            keySerde: io.confluent.kafka.serializers.KafkaAvroDeserializer
-            valueSerde: io.confluent.kafka.serializers.KafkaAvroDeserializer
+        processEvent-in-0:
+          destination: monitoring_events_in-1
+        handleEvent-in-0:
+          destination: monitoring_events_in-1
       kafka:
         streams:
+          bindings:
+            processEvent-in-0:
+              consumer:
+                keySerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+                valueSerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
           binder:
             application-id: events-monitor
             configuration:
+              schema.registry.url: http://localhost:8081
               commit.interval.ms: 1000
               default:
         # Kafka binder -> topics
@@ -43,16 +40,3 @@ spring:
             value.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
             schema.registry.url: http://localhost:8081
             specific.avro.reader: true
-        # Kafka stream binder -> streams
-        bindings:
-          monitoring_events_in:
-            destination: monitoring-events
-            content-type: application/*+avro
-          monitoring_events_out:
-            destination: monitoring-events
-            content-type: application/*+avro
-          # Stream
-          monitoring_events_stream:
-            destination: monitoring_events_in
-            content-type: application/*+avro
-
